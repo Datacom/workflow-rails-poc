@@ -21,3 +21,7 @@ Types of States:
     2 events [:approve, :reject]
 
   each state needs a target to notify, and a message (eventually templated)
+
+  - ideas - 
+ Have basic workflow options and tick boxes for the states and transitions wanted
+ Choose basic workflow from list of options at start

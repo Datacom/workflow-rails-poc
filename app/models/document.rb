@@ -27,13 +27,12 @@ end
 def self.insert_event(event_name, previous_state, new_state)
   # example call = Document.insert_event(:test_event, :new, :hi)
   Document.workflow_spec.states[previous_state].events[event_name] = Workflow::Event.new(event_name,  Document.workflow_spec.states[new_state], {})
-  define_method(event_name) { puts "Email someone please" }
+  define_method(event_name) { puts "Email someone please" } 
 end
 
 def assign_workflow
   # Load an object from the database
   doc = Document.first
-
 # Now define a workflow - exclusively for this object,
 # probably depending on some condition or database field
 if length < 100 
@@ -50,6 +49,7 @@ if length < 100
       state :complete
     end
   end
+  
 elsif length >= 100 
   class << doc
     include Workflow
