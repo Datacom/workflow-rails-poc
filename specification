@@ -1,0 +1,23 @@
+Document Types:
+  small
+  big
+
+Workflows:
+  Small:
+    new
+    manager_approval
+
+  Big:
+    new
+    manager_approval
+    finance_team_approval
+
+
+Types of States:
+  submission
+    1 event :submit
+
+  review
+    2 events [:approve, :reject]
+
+  each state needs a target to notify, and a message (eventually templated)
