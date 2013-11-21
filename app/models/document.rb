@@ -1,5 +1,24 @@
 class Document < ActiveRecord::Base
+ require 'rubygems'
+require 'viewpoint'
+ include Viewpoint::EWS
  include Workflow
+ require 'kconv'
+
+
+# SETUP FOR VIEWPOINT #
+# Viewpoint::EWS::EWS.endpoint = 'DNZWGEX2.datacom.co.nz/ews/exchange.asmx'
+# Viewpoint::EWS::EWS.set_auth 'Owen.Bannister@datacom.co.nz','Multi264'
+
+endpoint = 'https://dnzwgcas1.datacom.co.nz/ews/exchange.asmx'
+user = 'Owen.Bannister@datacom.co.nz'
+pass = 'Multi264'
+cli = Viewpoint::EWSClient.new endpoint, user, pass
+cli.ews.server_version ="Exchange2007"
+cli.folders
+
+##
+
  workflow do
   state :new do
     event :submit, :transitions_to => :awaiting_review

@@ -27,6 +27,7 @@ gem 'workflow'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 gem 'pg'
+gem 'viewpoint', :git => 'https://github.com/zenchild/Viewpoint.git'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -43,3 +44,13 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+# Handsoap (Thanks jrun for pointing me this way!)
+gem 'handsoap'
+# Nokogiri XML Parser
+# HttpClient
+gem 'httpclient'
+# NTLM Library
+gem 'rubyntlm'
+
+# iCalendar (still forthcoming in this release)
+gem 'icalendar'

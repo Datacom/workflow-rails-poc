@@ -1,0 +1,6 @@
+== README
+
+* Allows Documents to transition between states
+
+* Can dynamically create <tt>states</tt> and transitions(<tt>events</tt>)
+
