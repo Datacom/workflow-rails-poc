@@ -33,6 +33,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+## Mailer ##
+gem 'redis', '~>3.0.6'
+gem 'sidekiq'
+gem 'jsonpath'
+gem 'foreman'
+gem 'sidetiq'
+gem 'bootstrap-sass'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

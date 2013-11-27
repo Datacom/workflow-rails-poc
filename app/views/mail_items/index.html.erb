@@ -1,0 +1,67 @@
+<h1>Listing Mail Events</h1>
+
+<!-- <table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Watermark</th>
+      <th>Date</th>
+      <th>Item</th>
+      <th>Subject</th>
+      <th>Body</th>
+      <th>Sender</th>
+      <th>From</th>
+      <th>Is read</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mail_items.each do |mail_item| %>
+    <tr>
+      <td><%= mail_item.name %></td>
+      <td><%= mail_item.watermark %></td>
+      <td><%= mail_item.date %></td>
+      <td><%= mail_item.item_id %></td>
+      <td><%= mail_item.subject %></td>
+      <td><%= mail_item.body %></td>
+      <td><%= mail_item.sender %></td>
+      <td><%= mail_item.from %></td>
+      <td><%= mail_item.is_read %></td>
+      <td><%= link_to 'Show', mail_item %></td>
+      <td><%= link_to 'Edit', edit_mail_item_path(mail_item) %></td>
+      <td><%= link_to 'Destroy', mail_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table> -->
+
+<!-- <br> -->
+<!-- 
+
+<%= link_to 'New Mail item', new_mail_item_path %> -->
+<hr />
+<div class="alert alert-info">
+<p style="word-break: break-all">
+  <%= "Subscribed: #{@inbox.subscribed?}"%><br />
+<%= "Subscription ID: #{@inbox.subscription_id} "%> <br />
+<%=" Watermark: #{@inbox.watermark}"%>
+</p>
+</div>
+<hr />
+<h2>Mail Items</h2>
+<div class="row span6">
+<% @mail.each do |m|%>
+
+<div class="well span5">
+<p style="word-break: break-all"><%= "Subject: #{m.subject}  Message: #{m.body}"%></p>
+</div>
+<%end%>
+</div>
+
+
+
+
+

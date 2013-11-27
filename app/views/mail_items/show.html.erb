@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mail_item.name %>
+</p>
+
+<p>
+  <strong>Watermark:</strong>
+  <%= @mail_item.watermark %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @mail_item.date %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @mail_item.item_id %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @mail_item.subject %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @mail_item.body %>
+</p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @mail_item.sender %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @mail_item.from %>
+</p>
+
+<p>
+  <strong>Is read:</strong>
+  <%= @mail_item.is_read %>
+</p>
+
+<%= link_to 'Edit', edit_mail_item_path(@mail_item) %> |
+<%= link_to 'Back', mail_items_path %>
