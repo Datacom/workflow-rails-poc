@@ -17,6 +17,66 @@ Bundler.require(:default, Rails.env)
   end
 end
 
+# Monkey patch to manually set the XML being sent out
+  Viewpoint::EWS::SOAP::ExchangeDataServices.module_eval do
+    def create_item(opts)
+      opts = opts.clone
+      [:items].each do |k|
+        validate_param(opts, k, true)
+      end
+      req = build_soap! do |type, builder|
+        attribs = {}
+        attribs['MessageDisposition'] = opts[:message_disposition] if opts[:message_disposition]
+        attribs['SendMeetingInvitations'] = opts[:send_meeting_invitations] if opts[:send_meeting_invitations]
+        if(type == :header)
+        else
+          builder.nbuild.CreateItem(attribs) {
+            builder.nbuild.parent.default_namespace = @default_ns
+            builder.saved_item_folder_id!(opts[:saved_item_folder_id]) if opts[:saved_item_folder_id]
+            builder.nbuild.Items {
+              opts[:items].each {|i|
+                # The key can be any number of item types like :message,
+                #   :calendar, etc
+                ikey = i.keys.first
+                builder.send("#{ikey}!",i[ikey])
+              }
+            }
+          }
+        end
+      end
+
+      req = "<?xml version=\"1.0\"?>
+<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:t=\"http://schemas.microsoft.com/exchange/services/2006/types\" xmlns:m=\"http://schemas.microsoft.com/exchange/services/2006/messages\">
+  <soap:Header>
+    <t:RequestServerVersion Version=\"Exchange2007\"/>
+  </soap:Header>
+  <soap:Body>
+    <CreateItem xmlns=\"http://schemas.microsoft.com/exchange/services/2006/messages\" MessageDisposition=\"SendAndSaveCopy\">
+      <Items>
+        <t:Message>
+          <t:Subject>test</t:Subject>
+          <t:Body BodyType=\"Text\">There has been changes made to the document</t:Body>
+          <t:Importance>Normal</t:Importance>
+          <t:InReplyTo>project_id:123456,document_id:123456,email_id:123456</t:InReplyTo>
+          <t:ToRecipients>
+            <t:Mailbox>
+              <t:EmailAddress>owen.bannister@datacom.co.nz</t:EmailAddress>
+            </t:Mailbox>
+          </t:ToRecipients>
+      </t:Message>
+      </Items>
+    </CreateItem>
+  </soap:Body>
+</soap:Envelope>
+"
+      puts '##############################'
+      puts req
+      puts '##############################'
+      do_soap_request(req, response_class: Viewpoint::EWS::SOAP::EwsResponse)
+    end
+  end
+
+
 module WorkflowConcept
   class Application < Rails::Application
    require './app/workers/mail_checker'

@@ -56,7 +56,10 @@
 <% @mail.each do |m|%>
 
 <div class="well span5">
-<p style="word-break: break-all"><%= "Subject: #{m.subject}  Message: #{m.body}"%></p>
+<p style="word-break: break-all"><%= "Subject: #{m.subject}  Message: #{m.body} Sender: #{m.sender.name} #{m.sender.email_address}>> "%></p>
+<p style="word-break: break-all">
+  <%= "In Reply To: #{JsonPath.on(m.internet_message_headers.to_json, '$..In-Reply-To').first}"%>
+</p>
 </div>
 <%end%>
 </div>
